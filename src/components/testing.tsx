@@ -3,8 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+type Pokemon = {
+    id: number;
+    name: string;
+    image: string;
+    color: string;
+}
 export function Testing() {
-    const [pokemon, setPokemon] = useState<any[]>([]);
+    const [pokemon, setPokemon] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(false);
     const [score, setScore] = useState(0);
     const [clickedIds, setClickedIds] = useState<number[]>([]);
@@ -12,7 +18,7 @@ export function Testing() {
     useEffect(() => {
         const fetchPokemon = async () => {
             setLoading(true);
-            const data: any[] = [];
+            const data: Pokemon[] = [];
 
             for (let i = 1; i <= 18; i++) {
                 try {
@@ -50,7 +56,7 @@ export function Testing() {
         setPokemon(prev => shuffleArray([...prev]));
     };
 
-    const shuffleArray = (arr: any[]) => {
+    const shuffleArray = (arr: Pokemon[]) => {
         return arr
             .map(value => ({ value, sort: Math.random() }))
             .sort((a, b) => a.sort - b.sort)
